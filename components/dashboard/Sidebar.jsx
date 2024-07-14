@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 function Sidebar() {
@@ -45,26 +46,28 @@ function Sidebar() {
     }
 
     return (
-            <div className="w-25">
-                <div className={`bg-info bg-opacity-25 transition duration-300 min-vh-100 ${isTrue ? 'w-100' : 'w-0 d-none'}`}>
-                    <div className="p-3 shadow-sm d-flex gap-3 justify-content-between align-items-center">
+            <div className="w-100 my-3 ">
+                <div className={`d-flex align-items-center transition duration-300  w-100`}>
+                    <div className="p-3 flex-wrap w-25 shadow-sm d-sm-flex d-none sm:d-block gap-3 justify-content-between align-items-center">
                         <Link href={'/'}>
-                            <img style={{height:'100%', width: '100%'}} src='https://www.physio-therapies.co.uk/wp-content/uploads/2023/11/PHYSIO_THERAPIES_LOGO_-1024x131.png'  alt='image' />
+                        <h2 className="d-flex align-items-center gap-2 w-25"> <img className="w-100 h-100" src="../sprc-images/home/logo.png" alt="" /> SPRC <span className="text-dark">BD</span></h2>
                         </Link>
-                        <button onClick={() => setIsTrue(!isTrue)} className="hover-transform transition duration-200 p-1 bg-info rounded-circle">x</button>
+                        
+                        {/* <button onClick={() => setIsTrue(!isTrue)} className="hover-transform transition duration-200 p-1 bg-info rounded-circle">x</button> */}
                     </div>
-                    <div className="mt-4 d-flex flex-column gap-1">
+                    <div className="mx-4 w-100 d-flex flex-wrap align-items-center gap-3">
                         {routes.map((item, index) => (
-                            <Link className={`px-3 text-white py-2 ${route === item.link ? 'bg-primary' : 'bg-info'}`} key={index} href={item.link}>
-                                <p>{item.name}</p>
+                            <Link  key={index} href={item.link}>
+                                <Button className={`${route === item.link ? 'bg-primary' : 'bg-info'}`}>{item.name}</Button>
                             </Link>
                         ))}
-                        <button onClick={handleLogOut} className="px-3 text-white py-2 bg-info hover:bg-primary text-start transition duration-300">Log Out</button>
+                        <Button onClick={handleLogOut} className="object-fit-contain">Log Out</Button>
+                        <Link href='/'><Button className="d-sm-none d-block">Home</Button></Link>
                     </div>
                 </div>
-                <div className={`${isTrue ? 'd-none' : 'd-flex'} min-vh-100 justify-content-center align-items-center`}>
+                {/* <div className={`${isTrue ? 'd-none' : 'd-flex'} min-vh-100 justify-content-center align-items-center`}>
                     <button onClick={() => setIsTrue(!isTrue)} className="py-3 bg-info text-xl rounded-end">+</button>
-                </div>
+                </div> */}
             </div>
     )
 }

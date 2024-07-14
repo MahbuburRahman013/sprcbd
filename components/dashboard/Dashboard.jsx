@@ -10,6 +10,8 @@ import 'froala-editor/js/plugins/lists.min.js';
 import 'froala-editor/js/plugins/paragraph_format.min.js';
 import toast, { Toaster } from 'react-hot-toast';
 import { Button, Form, Spinner } from 'react-bootstrap';
+import useAxiosPublic from '../../hooks/useAxiosPublic'
+import { transliterate } from 'transliteration';
 
 
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=dba83ae483256811942a712f4a815835`
@@ -18,10 +20,10 @@ const img_hosting_api = `https://api.imgbb.com/1/upload?key=dba83ae483256811942a
 
 function Dashboard() {
     const [content, setContent] = useState('');
-    // const axiosPublic = useAxiosPublic();
+    const axiosPublic = useAxiosPublic();
     const [loading, setLoading] = useState(false)
 
-   
+
     const handleModelChange = (model) => {
         setContent(model);
     };
@@ -33,7 +35,8 @@ function Dashboard() {
         e.preventDefault()
         const form = e.target;
         const title = form.title.value;
-        const queryTitle = title.toLowerCase().split(' ').join('-');
+        const queryTitle = transliterate(title).toLowerCase().replace(/[^\w\s-]/g, '').trim()
+        .replace(/\s+/g, '-');
         const photo = form.photo.files[0];
         const imgFile = { image: photo }
         const res = await axiosPublic.post(img_hosting_api, imgFile, {
@@ -88,7 +91,7 @@ function Dashboard() {
 
     };
 
-    
+
     return (
         <div className="min-vh-100">
             <div className="rounded p-4 w-100 shadow-lg border">

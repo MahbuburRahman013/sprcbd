@@ -14,7 +14,7 @@ export default function Nav() {
     return () => setAdminInfo(adminInfo);
   }, [])
 
- 
+
   return (
     <header className="w-100">
       <div className="container">
@@ -129,7 +129,11 @@ export default function Nav() {
                     </li>
                 }
 
-
+                <li className="nav-item">
+                  <Link className="nav-link" href="/our-happy-client">
+                    our happy clients
+                  </Link>
+                </li>
 
               </ul>
 

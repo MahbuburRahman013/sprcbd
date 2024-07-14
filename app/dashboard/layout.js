@@ -7,9 +7,9 @@ const PrivateRoute = dynamic(()=> import('./../../components/auth/PrivateRoute')
 function DashboardLayoutPage({ children }) {
   return (
     <PrivateRoute>
-      <div className="d-flex  min-vh-100 overflow-auto">
-        <Sidebar className='w-25 ' />
-        <div className="p-3 w-75"> 
+      <div className="container">
+        <Sidebar className='w-100 ' />
+        <div className=" w-100 "> 
           {children}
         </div>
       </div>
