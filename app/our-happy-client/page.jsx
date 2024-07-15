@@ -1,9 +1,35 @@
 import React from 'react'
 import './client.css'
 
-function page() {
+function HappyClient() {
 
-    const data = [1,2,3,4,5]
+    const data = [
+        {
+            img: 'https://i.ibb.co/8bjZP3j/IMG-1999-1.jpg',
+        },
+        {
+            img: 'https://i.ibb.co/7QrgVf2/IMG-2001-1.jpg',
+        },
+        {
+            img: 'https://i.ibb.co/RHVj5CF/IMG-2154-1.jpg',
+        },
+        {
+            img: 'https://i.ibb.co/YPnMGZ3/IMG-5540-1.jpg',
+        },
+        {
+            img: 'https://i.ibb.co/PYmWt4B/IMG-7015-1.jpg',
+        },
+        {
+            img: 'https://i.ibb.co/m64WJxD/IMG-7021-1.jpg',
+        },
+        {
+            img: 'https://i.ibb.co/NygWj4s/IMG-8848-1.jpg',
+        },
+        {
+            img: 'https://i.ibb.co/XS9y8M8/IMG-9389-1.jpg',
+        },
+        
+    ]
 
     return (
         <div className='bg-warning-subtle'>
@@ -15,9 +41,9 @@ function page() {
                     {
                         data.map((item, index) => {
                             return (
-                                <div key={index} className='bg-white  px-4 d-flex gap-4 rounded-2 py-3'>
-                                    <img className='w-25 h-75' src="https://i.ibb.co/Xyc8GJ1/Whats-App-Image-2024-07-08-at-18-25-06-787e55c2.jpg" alt="" />
-                                    <div>
+                                <div key={index} className='bg-white mx-1 p-3 row rounded'>
+                                    <img className='col-xl-3 col-sm-8 col-12 mb-3' src={item?.img} alt="" />
+                                    <div className='col-xl-9'>
                                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, at consequuntur, dolore animi, non et labore fugiat illo iusto quis quae voluptatem pariatur eligendi fuga repellat vitae. Laboriosam, debitis non.</p>
                                         <h5><span className='text-danger'>Darwin Michle.</span>Project Manager</h5>
                                     </div>
@@ -31,4 +57,4 @@ function page() {
     )
 }
 
-export default page
+export default HappyClient

@@ -1,6 +1,18 @@
-import React from "react";
+"use client"
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
+
+  const [adminInfo, setAdminInfo] = useState(null);
+
+  useEffect(() => {
+    const adminInfo = localStorage.getItem('adminInfo');
+    const parseInfo = JSON.parse(adminInfo)
+    setAdminInfo(parseInfo);
+    return () => setAdminInfo(adminInfo);
+  }, [])
+
   return (
     <footer style={{ overflowX: 'hidden' }}>
       <div className="footer-widgets">
@@ -13,13 +25,13 @@ export default function Footer() {
                 data-aos-delay="0"
               >
                 <h6 className="widget-tiltle">&nbsp;</h6>
-                
+
                 <div className="media">
                   <i className="fa fa-map-marker"></i>
                   <div className="media-body ms-3">
                     <h6>Address</h6>
-                   1707,A Golpahar Moor,
-                   O.R.Nizam Road,Chittagong
+                    1707,A Golpahar Moor,
+                    O.R.Nizam Road,Chittagong
                   </div>
                 </div>
                 <div className="media">
@@ -27,7 +39,7 @@ export default function Footer() {
                   <div className="media-body ms-3">
                     <h6>Have any questions?</h6>
                     <a href="mailto:shafiqulphysiobd@gmail.com">
-                    shafiqulphysiobd@gmail.com
+                      shafiqulphysiobd@gmail.com
                     </a>
                   </div>
                 </div>
@@ -58,9 +70,9 @@ export default function Footer() {
                   <i className="fa fa-twitter"></i>
                   <div className="media-body ms-3">
                     <h6>
-                    <a href="/blogpost/physiotherapy">
-                    ফিজিওথেরাপির উপকার জানুন: আপনার পুনরুদ্ধার পথে সহায়তা করুন।
-                    </a>
+                      <a href="/blogpost/physiotherapy">
+                        ফিজিওথেরাপির উপকার জানুন: আপনার পুনরুদ্ধার পথে সহায়তা করুন।
+                      </a>
                     </h6>
                     <span>15 May, 2023</span>
                   </div>
@@ -69,7 +81,7 @@ export default function Footer() {
                   <i className="fa fa-twitter"></i>
                   <div className="media-body ms-3">
                     <h6>
-                    <a href="/blogpost/Bells_Palsy">বেলস পালসিতে ( Bell’s palsy ) বা মুখ একদিকে বেকে যাওয়া রোগের চিকিৎসা</a>
+                      <a href="/blogpost/Bells_Palsy">বেলস পালসিতে ( Bell’s palsy ) বা মুখ একদিকে বেকে যাওয়া রোগের চিকিৎসা</a>
                     </h6>
                     <span>15 May, 2023</span>
                   </div>
@@ -78,7 +90,7 @@ export default function Footer() {
                   <i className="fa fa-twitter"></i>
                   <div className="media-body ms-3">
                     <h6>
-                   <a href="/blogpost/CARPALTUNNELSYNDROME_SHAFIQULPHYSIOTHERAPY">CARPAL TUNNEL SYNDROME</a>
+                      <a href="/blogpost/CARPALTUNNELSYNDROME_SHAFIQULPHYSIOTHERAPY">CARPAL TUNNEL SYNDROME</a>
                     </h6>
                     <span>15 May, 2023</span>
                   </div>
@@ -87,7 +99,7 @@ export default function Footer() {
                   <i className="fa fa-twitter"></i>
                   <div className="media-body ms-3">
                     <h6>
-                    <a href="/blogpost/back-pain">কোমরে ব্যথা,ঘাড়ে ব্যথা,হাটু ব্যাথার চিকিৎসা করুন ঘরে বসে।</a>
+                      <a href="/blogpost/back-pain">কোমরে ব্যথা,ঘাড়ে ব্যথা,হাটু ব্যাথার চিকিৎসা করুন ঘরে বসে।</a>
                     </h6>
                     <span>15 May, 2023</span>
                   </div>
@@ -285,10 +297,25 @@ export default function Footer() {
               >
                 SprcBd.Com
               </a>
-              
+
             </p>
-            <p className="mb-0" data-aos="fade-left" data-aos-offset="0">
-              <a href="#">Terms Of Use</a>
+            <p className="mb-0 d-flex flex-wrap justify-content-center" data-aos="fade-left" data-aos-offset="0">
+
+
+              {
+                adminInfo === null ?
+
+                  <Link className="nav-link" href="/auth">
+                    Login
+                  </Link>
+                  :
+
+                  <Link className="nav-link" href="/dashboard">
+                    admin Dashboard
+                  </Link>
+
+              }
+
               <a href="#">Privacy & Security Statement</a>
             </p>
           </div>

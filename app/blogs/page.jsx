@@ -1,8 +1,20 @@
 import React from "react";
 import Blog from "/components/Blog";
 import Cta2 from "/components/Cta2";
+import useGetAllBlogs from '../../hooks/useGetAllBlogs'
 
-const page = () => {
+const page = async () => {
+  const blogs1 = await useGetAllBlogs('')
+  
+   function parseDate(dateStr) {
+    return new Date(dateStr);
+  }
+
+  const blogs = blogs1.sort((a, b) => {
+    return parseDate(b?.postedDate) - parseDate(a?.postedDate);
+  });
+
+
   return <div>
 <div className="four-card ">
 <div className="four-card-text container">
@@ -10,7 +22,7 @@ const page = () => {
 <h4 className="text-info"> ফিজিওথেরাপি বাংলা ব্লগ : সুস্থ জীবনের প্রথম ধাপ</h4>
 </div>
 </div>
-    <Blog />
+    <Blog blogs={blogs} />
     <Cta2 />
   </div>;
 };

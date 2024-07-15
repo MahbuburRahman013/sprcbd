@@ -1,19 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function Nav() {
-
-  const [adminInfo, setAdminInfo] = useState(null);
-
-  useEffect(() => {
-    const adminInfo = localStorage.getItem('adminInfo');
-    const parseInfo = JSON.parse(adminInfo)
-    setAdminInfo(parseInfo);
-    return () => setAdminInfo(adminInfo);
-  }, [])
-
 
   return (
     <header className="w-100">
@@ -115,19 +102,7 @@ export default function Nav() {
                     Get Appointment
                   </a>
                 </li>
-                {
-                  adminInfo === null ?
-                    <li className="nav-item">
-                      <Link className="nav-link" href="/auth">
-                        Login
-                      </Link>
-                    </li> :
-                    <li className="nav-item">
-                      <Link className="nav-link" href="/dashboard">
-                        Dashboard
-                      </Link>
-                    </li>
-                }
+               
 
                 <li className="nav-item">
                   <Link className="nav-link" href="/our-happy-client">

@@ -1,34 +1,12 @@
-"use client"
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Client, Databases, ID } from 'appwrite';
 import Link from 'next/link';
+import cheerio from 'cheerio';
 
-const client = new Client();
 
-client
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('64935a13920799c1729f');
+export default function Blog({blogs}) {
 
-export default function Blog() {
 
-  const [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
-    const databases = new Databases(client);
-
-    const promise = databases.listDocuments('64935a81b30d4699fbf3', '64935a92791b6004745c');
-
-    promise
-      .then(function (response) {
-        console.log(response);
-        setBlogs(response.documents);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
 
   return (
     // <div className="four-card ">
@@ -39,19 +17,27 @@ export default function Blog() {
 // </div>
     <div className="container">
       <div className="row">
-        {blogs.map((item) => (
-          <div className="col-sm-6 mb-3 mt-3" key={item.$id}>
+        {blogs.map((item) => {
+
+              const data = cheerio.load(item?.content);
+              const textContent = data('body').text();
+
+           return (
+           <div className="col-sm-6 mb-3 mt-3" key={item?._id}>
             <div className="card">
+              <img className='card-img' style={{maxHeight:'300px', objectFit:'cover'}} src={item?.img_url} alt="" />
               <div className="card-body">
-                <h5 className="card-title text-success">{item.title}</h5>
-                <p className="card-text">{item.content.substr(0,100)}...</p>
-                <Link href={"/blogpost/" + item.slug} className="btn btn-primary">
+                <h5 className="card-title text-success">{item?.title}</h5>
+                <p className="card-text">{textContent.substr(0,100)}...</p>
+                <Link href={`/blogs/${item?.queryTitle}`} className="btn btn-primary">
                   Read more.
                 </Link>
               </div>
             </div>
           </div>
-        ))}
+           )
+        }
+        )}
       </div>
     </div>
   );

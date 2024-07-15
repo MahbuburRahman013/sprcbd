@@ -1,17 +1,16 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { Button, Form, Spinner } from 'react-bootstrap';
+import useAxiosPublic from '../../hooks/useAxiosPublic'
+import { transliterate } from 'transliteration';
+import 'froala-editor/js/plugins/lists.min.js';
+import 'froala-editor/js/plugins/paragraph_format.min.js';
 import FroalaEditor from 'react-froala-wysiwyg';
 import 'froala-editor/js/froala_editor.pkgd.min.js';
 import 'froala-editor/js/plugins/font_size.min.js';
 import 'froala-editor/js/plugins/align.min.js';
 import 'froala-editor/js/plugins/char_counter.min.js';
-// import useAxiosPublic from '@/hooks/useAxiosPublic';
-import 'froala-editor/js/plugins/lists.min.js';
-import 'froala-editor/js/plugins/paragraph_format.min.js';
-import toast, { Toaster } from 'react-hot-toast';
-import { Button, Form, Spinner } from 'react-bootstrap';
-import useAxiosPublic from '../../hooks/useAxiosPublic'
-import { transliterate } from 'transliteration';
 
 
 const img_hosting_api = `https://api.imgbb.com/1/upload?key=dba83ae483256811942a712f4a815835`
@@ -36,7 +35,7 @@ function Dashboard() {
         const form = e.target;
         const title = form.title.value;
         const queryTitle = transliterate(title).toLowerCase().replace(/[^\w\s-]/g, '').trim()
-        .replace(/\s+/g, '-');
+            .replace(/\s+/g, '-');
         const photo = form.photo.files[0];
         const imgFile = { image: photo }
         const res = await axiosPublic.post(img_hosting_api, imgFile, {

@@ -1,7 +1,7 @@
 import Manage from "./../../../components/dashboard/manage/Manage";
 
 async function ManagePage() {
-  const result = await fetch(`https://sprcbd-blue.vercel.app/all-blogs-manage`, {
+  const result = await fetch(`http://localhost:5000/all-blogs-manage`, {
     cache: "no-cache",
   });
   const data = await result.json();

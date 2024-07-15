@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import bgImg from '../public/sprc-images/home/bgCardImg.jpg'
-import './homeCss/card.css'
+// import './homeCss/card.css'
 
 const FourCard = () => {
   return <>
